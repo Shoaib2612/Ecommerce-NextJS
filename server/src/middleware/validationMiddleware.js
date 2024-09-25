@@ -24,13 +24,6 @@ const validateUserSignup = [
     .matches(/[A-Z]/).withMessage('Password must contain at least one uppercase letter')
     .matches(/[!@#$%^&*(),.?":{}|<>]/).withMessage('Password must contain at least one special character'),
 
-  body('confirmPassword')
-    .custom((value, { req }) => {
-      if (value !== req.body.password) {
-        throw new Error('Passwords do not match');
-      }
-      return true;
-    })
 ];
 
 // Validation middleware for login

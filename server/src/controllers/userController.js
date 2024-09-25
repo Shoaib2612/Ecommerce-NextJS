@@ -4,6 +4,7 @@ const {loginUserService, signUpUserService, getSellerProductsService, addSellerP
 exports.signUpUser = async(req,res) => {
     try{
         const data = req.body;
+        console.log("dataaa" , data);
         const result  = await signUpUserService(data);
         return res.status(200).json(result);
     }catch(error){
