@@ -41,7 +41,7 @@ export default function SellerDashboard() {
         return;
       }
       try {
-        const res = await fetch(`http://localhost:5000/api/users/seller/getProducts/${userId}`, {
+        const res = await fetch(`http://test2-env.eba-g2w5pezx.ap-south-1.elasticbeanstalk.com/api/users/seller/getProducts/${userId}`, {
           method: 'GET',
         });
         if (!res.ok) {
@@ -75,7 +75,7 @@ export default function SellerDashboard() {
     const confirmed = window.confirm("Are you sure you want to delete this product?");
     if(!confirmed)return;
     try{
-      const response = await fetch(`http://localhost:5000/api/users/seller/deleteproduct/${productId}`,{
+      const response = await fetch(`http://test2-env.eba-g2w5pezx.ap-south-1.elasticbeanstalk.com/api/users/seller/deleteproduct/${productId}`,{
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -212,19 +212,19 @@ export default function SellerDashboard() {
                 className="relative p-4 sm:p-6 bg-black bg-opacity-70 shadow-lg rounded-lg hover:shadow-xl transform hover:scale-105 transition-transform duration-300"
               >
                 <h2 className="text-lg sm:text-xl font-bold text-yellow-300 transition-transform duration-300">
-                  {product.product_name[0].toUpperCase() + product.product_name.slice(1)}
+                  {product.product_name ? product.product_name[0].toUpperCase() + product.product_name.slice(1): "Product name not provided"}
                 </h2>
                 <p className="text-yellow-300 transition-transform duration-300">
-                  <span className="font-semibold">Category:</span> {product.category}
+                  <span className="font-semibold">Category:</span> {product.category ? product.category : "Product Category not mentioned"}
                 </p>
                 <p className="text-yellow-300 transition-transform duration-300">
-                  <span className="font-semibold">Price:</span> ₹{product.price}
+                  <span className="font-semibold">Price:</span> ₹{product.price ? product.price : "Price not mentioned"}
                 </p>
                 <p className="text-yellow-300 transition-transform duration-300">
-                  <span className="font-semibold">Discount:</span> {product.discount}%
+                  <span className="font-semibold">Discount:</span> {product.discount ? product.discount : "Discount not mentioned"}%
                 </p>
                 <p className="text-yellow-300 mt-2 transition-transform duration-300">
-                  {formatDescription(product.description[0].toUpperCase() + product.description.slice(1))}
+                  {product.description ? formatDescription(product.description[0]?.toUpperCase() + product.description.slice(1)) : "Description Not Provided"}
                 </p>
   
                 {/* Edit and Delete links */}

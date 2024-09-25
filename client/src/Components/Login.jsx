@@ -17,7 +17,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/users/login', {
+      const res = await fetch('http://test2-env.eba-g2w5pezx.ap-south-1.elasticbeanstalk.com/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

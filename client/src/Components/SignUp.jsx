@@ -26,7 +26,7 @@ export default function UserSignUp() {
       return;
     }
     try {
-      const res = await fetch('http://localhost:5000/api/users/signup', {
+      const res = await fetch('http://test2-env.eba-g2w5pezx.ap-south-1.elasticbeanstalk.com/api/users/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

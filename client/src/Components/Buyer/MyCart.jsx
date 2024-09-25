@@ -50,7 +50,7 @@ export default function SellerDashboard() {
         return;
       }
       try {
-        const res = await fetch(`http://localhost:5000/api/users/buyer/getmycart/${userId}`, {
+        const res = await fetch(`http://test2-env.eba-g2w5pezx.ap-south-1.elasticbeanstalk.com/api/users/buyer/getmycart/${userId}`, {
           method: 'GET',
         });
         if (!res.ok) {
@@ -72,7 +72,7 @@ export default function SellerDashboard() {
   const handleRemoveCart = async(cartId) => {
     const userId = localStorage.getItem("userId");
     try{
-      const response = await fetch(`http://localhost:5000/api/users/buyer/removecart/${cartId}`,{
+      const response = await fetch(`http://test2-env.eba-g2w5pezx.ap-south-1.elasticbeanstalk.com/api/users/buyer/removecart/${cartId}`,{
         method : 'DELETE',
         headers: {
           'Content-Type': 'application/json'
