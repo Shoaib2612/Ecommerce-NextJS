@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import "../Styles/globals.css";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -17,7 +18,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://test2-env.eba-g2w5pezx.ap-south-1.elasticbeanstalk.com/api/users/login', {
+      const res = await fetch('https://ecommerce-nextjs-server.onrender.com/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

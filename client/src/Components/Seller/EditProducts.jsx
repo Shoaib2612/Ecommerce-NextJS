@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import "../../Styles/globals.css"
 
 export default function EditProducts() {
   const [productName, setProductName] = useState('');
@@ -20,7 +21,7 @@ export default function EditProducts() {
         return;
       }
       try {
-        const response = await fetch(`http://test2-env.eba-g2w5pezx.ap-south-1.elasticbeanstalk.com/api/users/seller/getproductbyid/${id}`, {
+        const response = await fetch(`https://ecommerce-nextjs-server.onrender.com/api/users/seller/getproductbyid/${id}`, {
           method: 'GET',
         });
 
@@ -59,7 +60,7 @@ export default function EditProducts() {
     const userId = localStorage.getItem("userId")
     const productId = localStorage.getItem('productId'); // Get product ID from localStorage
     try {
-      const response = await fetch(`http://test2-env.eba-g2w5pezx.ap-south-1.elasticbeanstalk.com/api/users/seller/updateproduct/${productId}/${userId}`, {
+      const response = await fetch(`https://ecommerce-nextjs-server.onrender.com/api/users/seller/updateproduct/${productId}/${userId}`, {
         method: 'PUT', // Use PUT for updating an existing product
         headers: {
           'Content-Type': 'application/json',

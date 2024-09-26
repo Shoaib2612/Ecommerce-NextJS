@@ -14,9 +14,10 @@ export default function SellerDashboard() {
     const data = event.target.value;
     if (data !== "") {
       // Filter products based on product_name or category
+      const lowerCaseData = data.toLowerCase();
       const filtered = products.filter((product) => {
-        const productNameMatch = product.product_name?.toLowerCase().includes(data);
-        const productCategoryMatch = product.category?.toLowerCase().includes(data); 
+        const productNameMatch = product.product_name?.toLowerCase().includes(lowerCaseData);
+        const productCategoryMatch = product.category?.toLowerCase().includes(lowerCaseData); 
         // Return true if either product name or category matches
         return productNameMatch || productCategoryMatch;
       });
@@ -48,7 +49,7 @@ export default function SellerDashboard() {
         return;
       }
       try {
-        const res = await fetch(`http://test2-env.eba-g2w5pezx.ap-south-1.elasticbeanstalk.com/api/users/seller/getallproducts`, {
+        const res = await fetch(`https://ecommerce-nextjs-server.onrender.com/api/users/seller/getallproducts`, {
           method: 'GET',
         });
         if (!res.ok) {
@@ -79,7 +80,7 @@ export default function SellerDashboard() {
       return;
     }
     try {
-      const res = await fetch(`http://test2-env.eba-g2w5pezx.ap-south-1.elasticbeanstalk.com/api/users/buyer/addtocart`, {
+      const res = await fetch(`https://ecommerce-nextjs-server.onrender.com/api/users/buyer/addtocart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
