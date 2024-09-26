@@ -1,9 +1,13 @@
 
 ## E-Commerce Application
 
-This is a full-stack e-commerce website built using Next.js for the frontend and Node.js, Express.js, and PostgreSQL for the backend. The application supports user authentication, seller product management, and buyer shopping cart functionality.
+This is a full-stack e-commerce website built using Next.js for the frontend and Node.js, Express.js, and PostgreSQL for the backend. The application supports user authentication, seller product management, and buyer shopping cart functionality. The UI supports both Larger and Smaller screens.
 
-Features
+## Deployments handled on AWS Amplify(client) and Render(server).
+
+Link - https://staging.d3cpbpn9wye9i1.amplifyapp.com/
+
+## Features
 
 User Sign Up and Login (for both sellers and buyers)
 
@@ -14,7 +18,7 @@ Buyers can search products, add to cart, and remove from the cart.
 Role-based functionality with separate seller and buyer dashboards.
 
 
-Technologies
+## Technologies
 
 Frontend: Next.js, Tailwind CSS
 
@@ -22,7 +26,7 @@ Backend: Node.js, Express.js
 
 Database: PostgreSQL
 
-Getting Started
+## Getting Started
 
 Prerequisites
 
@@ -35,7 +39,7 @@ PostgreSQL installed
 
 ## 1. Clone the repository:
 
-git clone https://github.com/Shoaib2612/Ecommerce-Website.git
+git clone https://github.com/Shoaib2612/Ecommerce-NextJS.git
 
 ## 2. Install dependencies:
 
@@ -45,17 +49,45 @@ npm install
 
 Create a .env file in the root directory and add the following variables:
 
-DB_USER=your_db_user
-DB_PASSWORD=your_db_password
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=ecommerce_db
+DATABASE_URL= postgresql://postgres.wyeamgddjtjoknsvgxiu:[your Password]@aws-0-ap-south-1.pooler.supabase.com:6543/postgres
 
 ## 4. Set up the database:
 
-# PostgreSQL commands to create the database
-CREATE DATABASE ecommerce_db;
+# PostgreSQL commands to create the database tables
 
+## Users Table :
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,                 -- Auto-incrementing ID for each user
+    role VARCHAR(20) NOT NULL,             -- Role of the user (e.g., 'seller', 'buyer')
+    username VARCHAR(50) NOT NULL,         -- Username for the user
+    email VARCHAR(100) NOT NULL UNIQUE,    -- Email of the user (must be unique)
+    password VARCHAR(255) NOT NULL,        -- Hashed password for the user
+    created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- Timestamp when the user is created
+);
+
+## Products Table :
+
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,                -- Auto-incrementing ID for each product
+    seller_id INT REFERENCES users(id) ON DELETE CASCADE, -- Reference to the seller (user)
+    name VARCHAR(100) NOT NULL,           -- Product name
+    category VARCHAR(50) NOT NULL,        -- Product category (e.g., 'clothes', 'shoes')
+    description TEXT,                     -- Product description
+    price DECIMAL(10, 2) NOT NULL,        -- Product price with two decimal points
+    discount DECIMAL(5, 2) DEFAULT 0,     -- Discount on the product (default is 0)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- Timestamp when the product is created
+);
+
+## Cart Table : 
+
+CREATE TABLE cart (
+    id SERIAL PRIMARY KEY,                -- Auto-incrementing ID for each cart item
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,  -- Reference to the buyer (user)
+    product_id INT REFERENCES products(id) ON DELETE CASCADE,  -- Reference to the product
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Timestamp when the product is added to the cart
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- Timestamp when the cart is updated
+);
 ## 5. Run the app:
 
 ## Backend (server)
